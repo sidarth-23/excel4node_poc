@@ -7,21 +7,24 @@ export const transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: 'sidarth157@gmail.com', // Replace with your email
-    pass: 'gltdyhncrykihgui' // Replace with your password
+    user: 'plexus.administrator@applexus.com', // Replace with your email
+    pass: '' // Replace with your password
   }
 });
 
-export let mailOptions = (userEmail: string) => {return {
-  from: '"Sidarth G" <sidarth157@gmail.com>', // sender address
+export let mailOptions = (userEmail: string, fileName: string, ccEmail: string) => {
+  console.log('userEmail', userEmail, 'fileName', fileName, 'ccEmail', ccEmail)
+  return {
+  from: '"Plexus" <plexus.administrator@applexus.com>', // sender address
   to: userEmail, // list of receivers
+  cc: ccEmail,
   subject: 'Hello. Here is your report', // Subject line
-  text: 'Hello user', // plain text body
-  html: '<b>Hello User</b>', // html body
+  text: 'Hello reciepient,', // plain text body
+  html: '<b>Hello recipient,</b><br>Here is your requested report.', // html body
   attachments: [
     {
-      filename: 'CustomName.xlsx',
-      path: __dirname + '/../../CustomName.xlsx'
+      filename: fileName,
+      path: __dirname + `/../../${fileName}`
     }
   ]
 }};
